@@ -321,7 +321,7 @@ def requestConnection():
     mydb = MySQLdb.connect(host='localhost',
     user='root',
     passwd='root',
-    db='test')
+    db='askq')
     return mydb
 
 def requestCursor(conn):
@@ -462,7 +462,7 @@ def question_page2(val,page): # took care when question is less than 3
     if val==0:
         l=cursor.execute('SELECT * FROM Question ORDER BY Creation_Date DESC limit 3 offset '+str(offset))
     elif val==1:
-        l=cursor.execute('SELECT * FROM Question ORDER BY Score limit 3 offset '+str(offset))
+        l=cursor.execute('SELECT * FROM Question ORDER BY Score DESC limit 3 offset '+str(offset))
     l=cursor.fetchall()
     n=len(l)
     ans=tag_list_from_listof_id(l,n)

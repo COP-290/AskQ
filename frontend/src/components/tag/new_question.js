@@ -46,8 +46,7 @@ export default function New_ques() {
             const q = JSON.stringify(p)
             const s = JSON.parse(q)
             // console.log(s)
-            // console.log(s)
-            // console.log(colourOptions)
+
             setTags(s)
           })
           );

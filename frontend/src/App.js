@@ -21,7 +21,6 @@ import Main from './components/tag/main';
 
 
 function App() {
-  const [socketInstance, setSocketInstance] = useState("");
   const [loading, setLoading] = useState(true);
   const [buttonStatus, setButtonStatus] = useState(false);
 
@@ -68,7 +67,7 @@ function App() {
           <Routes>
             <Route path="/tag1" element={<><Navbar/><Tag1/></>} />        
             {/* <Route path="/socket" element={<WebSocketCall/>} />         */}
-            <Route path="/main" element={<><Navbar/><Main/></>} />
+            <Route path="/" element={<><Navbar/><Main/></>} />
             <Route path="/about" element={<><Navbar/><About/></>} />        
             <Route path="/tag" element={<><Navbar/><Tag/></>} />        
             <Route path="/tag/:id" element={<><Navbar/><Question/> </>} />        

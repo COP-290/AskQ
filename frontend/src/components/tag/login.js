@@ -9,6 +9,7 @@ export default function Login() {
   const [username,setUsername] = useState('')
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
+  const [error,setError] = useState(false)
 
   let navigate = useNavigate();
   const to = async (id) => {
@@ -20,9 +21,9 @@ export default function Login() {
   //   });
   };
 
-  function api(Username,Email,Password){
+  async function api(Username,Email,Password){
     console.log(Username,Email,Password)
-    fetch(`/login/`, {
+    await fetch(`/login/`, {
         method: 'POST',
         body: JSON.stringify({
           'Email': Email,
@@ -34,11 +35,13 @@ export default function Login() {
         }
         })
         .then(function(response){ 
-        return response.json()})
+        })
         .then(function(data)
         {console.log(data)
-      }).catch(error => console.error('Error:', error)); 
-  
+        }).catch(error => console.error('Error:', error)); 
+        
+      to('profile')
+    
   }
 
   const handleInputChange = (e) => {
@@ -86,7 +89,7 @@ export default function Login() {
                   </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button type="button" class="sign_up_btn btn btn-primary" onClick={()=>{api(username,email,password);to('profile')}}>Login</button>
+                    <button type="button" class="sign_up_btn btn btn-primary" onClick={()=>{api(username,email,password)}}>Login</button>
                 </div>
             </form>
         </div>

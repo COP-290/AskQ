@@ -7,7 +7,7 @@ from tag import get_tags,get_tags_list
 from question import pagefunction,pagefunction2,pagefunction_number,pagefunction_number_all
 from question import showQuestion_byscore_help,sort_que_by_time,sort_que_by_time_number,sort_quesbyTag
 from particular_question import particular_que_from_id,answer_from_parent_id
-from particular_question import particular_que_from_id,answer_from_parent_id,score_question,score_answer,sort_ans_by_time,put_answer
+from particular_question import particular_que_from_id,answer_from_parent_id,score_question,put_answer
 from particular_question import one_ans
 
 # from user import check_login
@@ -20,7 +20,7 @@ def requestConnection():
     mydb = MySQLdb.connect(host='localhost',
     user='root',
     passwd='root',
-    db='test')
+    db='askq')
     return mydb
 
 def requestCursor(conn):
@@ -284,7 +284,7 @@ def newanswer(id):
             content = request.get_json()['Answer']
             # print("test...", content)
             # content = request.form['Answer']
-            put_answer(id,content)
+            put_answer(id,session['id'],content)
             #put_answer(id,session['id'],content)
             # return redirect(url_for('particular_question',id=id))
         return "True"
@@ -317,8 +317,8 @@ def showAns_byscore(id):
 @app.route('/<int:id>/time/ans',methods=['GET'])
 def sort_ans_by_time_main(id):
     l,n,ans_list,m=sort_ans_by_time(id,1)
-    return render_template('particular_question.html',l=l,n=n,ans_list=ans_list,m=m)
+    return render_template('particular_question.html',l=l,n=n,ans_list=ans_list,m=m)    
 
 
 if __name__=="__main__":
-    app.run(host='0.0.0.0',debug=True,port=5003)
+    app.run(host='0.0.0.0',debug=True,port=4001)

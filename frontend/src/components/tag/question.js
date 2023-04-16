@@ -8,7 +8,7 @@ export default function Question() {
 
   const [data,setdata] = useState(null);
   const [page, setPage] = useState(1)
-  const [sortby,setSortby] = useState('/time');
+  const [sortby,setSortby] = useState('/score');
   const [number, setNumber] = useState(0)
   const { id } = useParams(); 
   console.log(id);
@@ -74,9 +74,9 @@ useEffect(() => {
       Sorting
     </button>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" onClick={()=>setSortby('/time')}>Newest</a></li>
-      <li><a class="dropdown-item" href="#">Active</a></li>
-      <li><a class="dropdown-item" onClick={()=>setSortby('/score')}>Score</a></li>
+      <li><a class="dropdown-item" style={{"cursor":"pointer"}} onClick={()=>setSortby('/time')}>Newest</a></li>
+      {/* <li><a class="dropdown-item" href="#">Active</a></li> */}
+      <li><a class="dropdown-item" style={{"cursor":"pointer"}} onClick={()=>setSortby('/score')}>Score</a></li>
     </ul>
   </div>
 </div>
@@ -106,8 +106,8 @@ useEffect(() => {
         <div class="container">
           <div class="row mx-lg-n5">
             <div class="vav col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 d-flex justify-content-center" >{value[0][3]} votes</div>
-            <div class="vav col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 d-flex justify-content-center" >0 answer</div>
-            <div class="vav col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 d-flex justify-content-center" >0 views</div>
+            {/* <div class="vav col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 d-flex justify-content-center" >0 answer</div>
+            <div class="vav col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 d-flex justify-content-center" >0 views</div> */}
           </div>
         </div>
         <hr/>
@@ -173,7 +173,7 @@ useEffect(() => {
             page={page}
             between={3}
             total={number?number:0}
-            limit={6}
+            limit={3}
             changePage={(page) => {
             setPage(page); 
             console.log(page)

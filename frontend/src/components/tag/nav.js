@@ -33,7 +33,7 @@ export default function Navbar() {
       <>
 <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container-fluid mx-3 d-flex justify-content-between" >
-          <a class="navbar-brand site_icon px-5"  href="/main" style={{"fontSize":"50px"}}>askQ</a>
+          <a class="navbar-brand site_icon px-5"  href="/" style={{"fontSize":"50px"}}>askQ</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>

@@ -56,13 +56,12 @@ export default function Profile() {
           console.log(detail);
         })
     );
-}, []);  
+  },[]);  
 
-  useEffect(() => {
-    // document.title = `You clicked ${} times`;
-  },[Text]);
+
 
     return (
+
         <>
         <body>
         <div class="d-flex flex-column justify-content-center mt-3">

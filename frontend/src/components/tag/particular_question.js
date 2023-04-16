@@ -22,6 +22,7 @@ export default function Par_ques() {
   const [content,setContent] = useState('');
   const [data,setdata] = useState(0);
   const [ans,setans] = useState(0);
+  const [sortby,setSortby] = useState(0);
   const [score,setScore] = useState(0);
   const { id } = useParams(); 
 
@@ -40,12 +41,12 @@ export default function Par_ques() {
     
     fetch(`/${id}/answers`).then((res) =>
     res.json().then((data) => {
-      // console.log(data);
+      // console.log(Object.keys(data).length);
       setans(data)
     })
     );
 
-},[score]);
+},[score,sortby]);
 
   function inc(){
     fetch(`/${id}/upscore`).then((res) =>
@@ -130,7 +131,7 @@ function api(id,Answer){
                     {data[1]?  Object.entries(data[1]).map(([key,value])=>
                     <>
                         <div class=" justify-content-center">
-                        <a class="num_button py-2 px-3" >
+                        <a class="num_button py-2 px-3" href={`/tag/${value[0]}`} >
                           {value[0]}
                         </a>
                       </div>
@@ -182,7 +183,7 @@ function api(id,Answer){
       <div class="row">
       
         <div class="col-6 no_answer d-flex justify-content-end">
-          {/* {{m}} Answer */}100 answers
+          {Object.keys(ans).length} {Object.keys(ans).length===1?"answer":"answers"}
         </div>
 
         {/* sorting box */}
@@ -193,7 +194,7 @@ function api(id,Answer){
             </button>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Newest</a></li>
-              <li><a class="dropdown-item" href="#">Active</a></li>
+              {/* <li><a class="dropdown-item" href="#">Active</a></li> */}
               <li><a class="dropdown-item" href="#">Score</a></li>
             </ul>
           </div>

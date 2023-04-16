@@ -4,7 +4,7 @@ def requestConnection():
     mydb = MySQLdb.connect(host='localhost',
     user='root',
     passwd='root',
-    db='test')
+    db='askq')
     return mydb
 
 def requestCursor(conn):
