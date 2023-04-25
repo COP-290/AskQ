@@ -11,6 +11,12 @@ export default function Login() {
   const [password,setPassword] = useState('')
   const [error,setError] = useState(false)
 
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    api(username,email,password)
+  }
+
+
   let navigate = useNavigate();
   const to = async (id) => {
     let path = `/${id}`;
@@ -35,12 +41,21 @@ export default function Login() {
         }
         })
         .then(function(response){ 
+          // console.log(response)
         })
         .then(function(data)
         {console.log(data)
         }).catch(error => console.error('Error:', error)); 
         
-      to('profile')
+      fetch('/user').then((res) =>
+      res.json().then((data) => {
+        console.log(data)
+        if (data){to('profile')}
+        else {setError('Invalid Username/Password')}
+        console.log(error)
+      })
+      );        
+      // to('profile')
     
   }
 
@@ -66,22 +81,25 @@ export default function Login() {
 <div class="row">
     <div class="col-12 d-flex justify-content-center mt-3">
         <div class="sign_up_box p-3">
-            <form>
+            <form onSubmit={onSubmit}>
             <div class="mb-3">
                     <label for="exampleInputusername1" class="form-label label_title">Username</label>
                     <input type="username" class="form-control" id="username" aria-describedby="usernameHelp" onChange={(e) => handleInputChange(e)}></input>
                   </div>
-                <div class="mb-3">
+                {/* <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label label_title">Email address</label>
                   <input type="email" class="form-control" id="email" placeholder="name@example.com" aria-describedby="emailHelp" onChange={(e) => handleInputChange(e)}></input>
                   <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                </div>
+                </div> */}
                 <div class="mb-3 row d-flex flex-column">
                     <label for="inputPassword" class="col-sm-2 col-form-label label_title">Password</label>
                     <div class="col-12">
                       <input type="password" class="form-control" id="password" onChange={(e) => handleInputChange(e)}></input>
                     </div>
                   </div>
+                <div class="mb-3 d-flex justify-content-center" style={{"color":"red"}}>
+                  {error}
+                </div>
                 <div class="mb-3 d-flex justify-content-center">
                   Are you new here?
                   <div class="px-1">
@@ -89,7 +107,7 @@ export default function Login() {
                   </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button type="button" class="sign_up_btn btn btn-primary" onClick={()=>{api(username,email,password)}}>Login</button>
+                    <button type="submit" class="sign_up_btn btn btn-primary" >Login</button>
                 </div>
             </form>
         </div>

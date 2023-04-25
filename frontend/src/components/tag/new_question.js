@@ -1,6 +1,7 @@
 import JoditEditor from "jodit-react";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect,useMemo } from "react";
 import Select from 'react-select';
+import { useNavigate } from "react-router-dom";
 
 export default function New_ques() {
 
@@ -8,6 +9,25 @@ export default function New_ques() {
     const [taglist,setTaglist] = useState([])
     const [title,setTitle] = useState([])
     const [content,setContent] = useState('');
+    // const config = useMemo({readonly:true}, []);
+    // const config = useMemo(()=>
+    //   {
+    //     readonly: false,
+    //   },
+    //   ["placeholder"]
+    // );
+
+    let navigate = useNavigate();
+    const to = async (id) => {
+      let path = `/${id}`;
+      navigate(path);
+    }
+
+    const onSubmit = async (event) => {
+      event.preventDefault();
+      api(title,content,taglist)
+
+    }
 
     function api(Title,Body,Tags){
       console.log(Title,Body,Tags)
@@ -25,7 +45,7 @@ export default function New_ques() {
           .then(function(response){ 
           return response.json()})
           .then(function(data)
-          {console.log(data)
+          {console.log(data);to(`question/${data}`)
         }).catch(error => console.error('Error:', error)); 
     
     }
@@ -69,11 +89,11 @@ export default function New_ques() {
       </div>
     </div>
 
-    <form class="row mx-5 my-4" method="POST" action="/ask/question">
+    <form class="row mx-5 my-4" onSubmit={onSubmit}>
     <div class="title col-12" style={{"font-size": "35px"}}>
     <div class="mb-3  d-flex flex-row" >
         <span class="d-flex justify-content-center input-group-text new_question_span" id="basic-addon1">Title</span>
-        <input type="text" class="form-control q_title"  placeholder="Enter title.." aria-label="Title" aria-describedby="basic-addon1" id="title" onChange={(e) => handleInputChange(e)} ></input>
+        <input required type="text" class="form-control q_title"  placeholder="Enter title.." aria-label="Title" aria-describedby="basic-addon1" id="title" onChange={(e) => handleInputChange(e)} ></input>
     </div>
   </div>
 
@@ -89,6 +109,7 @@ export default function New_ques() {
     isMulti
     // name="colors"
     options={tags}
+    required
     className="basic-multi-select"
     classNamePrefix="select"
     onChange={newcontent=>{console.log(newcontent);setTaglist(newcontent)}}
@@ -105,10 +126,9 @@ export default function New_ques() {
 
         <div class="q_title">
         <JoditEditor
-        
 			ref={editor}
 			value={content}
-			onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+			onBlur={newContent => setContent(newContent)}
       onChange={newcontent=>{}}
       
     />
@@ -119,7 +139,7 @@ export default function New_ques() {
       <div class="d-flex justify-content-center ">
         <div class="col-4 d-flex justify-content-center column-gap-1">
           <div class="px-1">
-            <button type="button" class="p-1 btn btn-outline-primary" onClick={()=>{api(title,content,taglist)}}>Submit</button>
+            <button type="submit" class="p-1 btn btn-outline-primary">Submit</button>
           </div>
           <div class="px-1">
             <button type="button" class="p-1 btn btn-outline-danger">Cancel</button>

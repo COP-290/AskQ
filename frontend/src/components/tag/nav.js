@@ -1,7 +1,9 @@
-// import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useNavigate } from "react-router-dom";
+import MyImage from '/home/baadalvm/repos/Test/frontend/src/assets/askq.jpeg'
 
 export default function Navbar() {
+  const [quer,setQuer] = useState(null);
 
   let navigate = useNavigate();
   const to = async (id) => {
@@ -12,6 +14,28 @@ export default function Navbar() {
   //     offset: 0,
   //   });
   };
+
+  const handleInputChange = (e) => {
+    const {id , value} = e.target;
+    
+    if(id === "quer"){setQuer(value);}
+    console.log(quer)
+
+    
+} 
+
+  function searc(){
+
+      let path = `/search`;
+      navigate(path,{state:{query:quer}});
+
+  }
+
+  const onSubmit = async (event) => {
+    // prevent redirect
+    event.preventDefault();
+    searc();
+  }
 
     function redirect(){
       fetch('/checkuser').then((res) =>
@@ -32,27 +56,32 @@ export default function Navbar() {
   return (
       <>
 <nav class="navbar navbar-expand-lg navbar-light ">
-        <div class="container-fluid mx-3 d-flex justify-content-between" >
-          <a class="navbar-brand site_icon px-5"  href="/" style={{"fontSize":"50px"}}>askQ</a>
+        <div class="container-fluid ms-3 d-flex justify-content-between" >
+          <a class="navbar-brand site_icon ps-5"  href="/" style={{"fontSize":"50px"}}>
+          <img src={MyImage} height="50px"></img>
+          </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item mx-3 d-flex justify-content-center">
-                <a class="nav-link px-3 mx-1" aria-current="page" href="/about">About</a>
+              <li class="nav-item d-flex justify-content-center">
+                <a class="nav-link  mx-1" aria-current="page" href="/about">About</a>
+              </li>
+              <li class="nav-item ms-3 d-flex justify-content-center">
+                <a class="nav-link  px-3 mx-1" href="/tag">Tags</a>
               </li>
               <li class="nav-item mx-3 d-flex justify-content-center">
-                <a class="nav-link  px-3 mx-1" href="/tag">Tag</a>
+                <a class="nav-link  px-3 mx-1" href="/question">Questions</a>
               </li>
-              <li class="nav-item mx-3 d-flex justify-content-center">
-                <a class="nav-link  px-3 mx-1" href="/question">Question</a>
+              <li class="nav-item mx-1 d-flex justify-content-center">
+                <a class="nav-link  px-3 mx-1" href="/user">Users</a>
               </li>
             </ul> 
             
-            <form class="d-flex mx-2 mb-3">
-              <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search"></input>
-              <button type="button" class="nav_search_btn btn btn-success">Search</button>
+            <form onSubmit={onSubmit} class="d-flex mx-2 mb-3">
+              <input id="quer" class="form-control me-2" type="search" placeholder="Search..." aria-label="Search" onChange={(e) => handleInputChange(e)}></input>
+              <button class="btn btn-success" >Search</button>
             </form>
             <div class="col-xl-1 col-lg-1 col-md-12 user_ppp d-flex justify-content-center " >
                 <div class="d-flex justify-content-center" >

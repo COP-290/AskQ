@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
 
@@ -13,9 +14,15 @@ export default function Signup() {
     if(id === "username"){setUsername(value);}  
 }   
 
-function api(Username,Email,Password){
+let navigate = useNavigate();
+const to = async (id) => {
+  let path = `/${id}`;
+  navigate(path);
+}
+
+  async function api(Username,Email,Password){
   console.log(Username,Email,Password)
-  fetch(`/register`, {
+  await fetch(`/register`, {
       method: 'POST',
       body: JSON.stringify({
         'Email': Email,
@@ -31,6 +38,12 @@ function api(Username,Email,Password){
       .then(function(data)
       {console.log(data)
     }).catch(error => console.error('Error:', error)); 
+  to('login')
+}
+
+const onSubmit = async (event) => {
+  event.preventDefault();
+  api(username,email,password)
 
 }
 
@@ -47,24 +60,24 @@ function api(Username,Email,Password){
 <div class="row">
     <div class="col-12 d-flex justify-content-center mt-3">
         <div class="sign_up_box p-3">
-            <form >
+            <form onSubmit={onSubmit}>
                 <div class="mb-3">
                     <label for="exampleInputusername1" class="form-label label_title" >Username</label>
-                    <input type="username" class="form-control" id="username" aria-describedby="usernameHelp" onChange={(e) => handleInputChange(e)}></input>
+                    <input required type="username" class="form-control" id="username" aria-describedby="usernameHelp" onChange={(e) => handleInputChange(e)}></input>
                   </div>
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label label_title">Email address</label>
-                  <input type="email" class="form-control" id="email" placeholder="name@example.com" aria-describedby="emailHelp" onChange={(e) => handleInputChange(e)}></input>
+                  <input required type="email" class="form-control" id="email" placeholder="name@example.com" aria-describedby="emailHelp" onChange={(e) => handleInputChange(e)}></input>
                   <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                 </div>
                 <div class="mb-3">
                   <label for="exampleInputPassword1" class="form-label label_title">Password</label>
-                  <input type="password" class="form-control" id="password" onChange={(e) => handleInputChange(e)}></input>
+                  <input required type="password" class="form-control" id="password" onChange={(e) => handleInputChange(e)}></input>
                 </div>
-                <div class="mb-3 form-check">
+                {/* <div class="mb-3 form-check">
                   <input type="checkbox" class="form-check-input" id="exampleCheck1"></input>
                   <label class="form-check-label" for="exampleCheck1">Remember me</label>
-                </div>
+                </div> */}
                 <div class="mb-3 d-flex justify-content-center">
                   Already have an account?
                   <div class="px-1">
@@ -72,7 +85,7 @@ function api(Username,Email,Password){
                   </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button type="button" onClick={()=>api(username,email,password)} class="sign_up_btn btn btn-primary">Sign up</button>
+                    <button type="submit" class="sign_up_btn btn btn-primary">Sign up</button>
                 </div>
             </form>
         </div>
