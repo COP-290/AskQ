@@ -77,8 +77,8 @@ useEffect(() => {
   </button>
 </div>
 
-<div class="row col-12 px-3 d-flex justify-content-start">
-  <div class="dropdown col-12 px-4 ">
+<div class="col-12 px-3 d-flex justify-content-center">
+  <div class="dropdown d-flex justify-content-center col-12 px-4 ">
     <button  class="sorting_box btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
       Sorting
     </button>
