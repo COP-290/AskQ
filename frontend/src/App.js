@@ -18,6 +18,9 @@ import About from './components/tag/about';
 import { useEffect, useState } from "react";
 import Fzf from './components/tag/404';
 import Main from './components/tag/main';
+import Search from './components/tag/search';
+import User from './components/tag/users\'_page';
+import Par_user from './components/tag/par_user';
 
 
 function App() {
@@ -77,10 +80,13 @@ function App() {
             <Route path="/new_question" element={<><Navbar/><New_ques/></>} />        
             <Route path="/question/:id" element={<><Navbar/><Par_ques/></>} />        
             <Route path="/question" element={<><Navbar/><Question/></>} />        
+            <Route path="/search" element={<><Navbar/><Search/></>} />        
             <Route path="/profile" element={<><Navbar/><Profile/></>} />        
             <Route path="/login" element={<><Navbar/><Login/></>} />        
-            <Route path="/signup" element={<><Navbar/><Signup/></>} /> 
-            <Route path="/404" element={<Fzf/>} />       
+            <Route path="/signup" element={<><Navbar/><Signup/></>} />
+            <Route path="/user" element={<><Navbar/><User/></>} />
+            <Route path="/user/:id" element={<><Navbar/><Par_user/></>} /> 
+            <Route path="/:id" element={<Fzf/>} />       
           </Routes>
         </Router>
 

@@ -113,23 +113,23 @@ def score_question(Up,id):
 #         conn.close()
 #         return l,n,ans_list,m 
 
-# def sort_ans_by_time(id,time):
-#     conn = requestConnection()
-#     cursor = requestCursor(conn)
-#     l=particular_que_from_id(id)
-#     n=1
-#     if time:
-#       ans_list= cursor.execute('SELECT * FROM Answer  where Parent_ID = ' + str(id)+' Order by Creation_Date')
-#     else:
-#         ans_list= cursor.execute('SELECT * FROM Answer  where Parent_ID = ' + str(id)+' Order by Score')
-#     ans_list = cursor.fetchall()
-#     Answer_list = []
-#     m=len(ans_list)
-#     for k in range(m):
-#         Answer_list.append(ans_list[k])
-#     cursor.close()
-#     conn.close()
-#     return l,n,Answer_list,m 
+def sort_ans_by_time(id,time):
+    conn = requestConnection()
+    cursor = requestCursor(conn)
+    l=particular_que_from_id(id)
+    n=1
+    if time:
+      ans_list= cursor.execute('SELECT * FROM Answer  where Parent_ID = ' + str(id)+' Order by Creation_Date')
+    else:
+        ans_list= cursor.execute('SELECT * FROM Answer  where Parent_ID = ' + str(id)+' Order by Score')
+    ans_list = cursor.fetchall()
+    Answer_list = []
+    m=len(ans_list)
+    for k in range(m):
+        Answer_list.append(ans_list[k])
+    cursor.close()
+    conn.close()
+    return l,n,Answer_list,m 
 
 # def put_answer(id,body): #has to correct this function
 def put_answer(id,ownerid,body):

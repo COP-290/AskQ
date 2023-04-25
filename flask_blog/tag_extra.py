@@ -167,17 +167,6 @@ def Update_About(body):
         return "first logged in"
 
 
-def list_of_user_date(creationdate):
 
-def list_of_user_score(score):
+# print(len(list_of_user_date(1,0,0,0,1)))
 
-def list_of_user_upvote():
-
-def list_of_user_downvote():
-
-def list_of_user_reputation():
-
-def  question_from_list_of_tag(taglist,page):
-    conn = requestConnection()
-    cursor = requestCursor(conn)
-    a=cursor.execute('select id from Tag where tags')

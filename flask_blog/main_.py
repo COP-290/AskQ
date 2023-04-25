@@ -2,16 +2,18 @@ from flask import Flask, render_template, request, url_for, flash, redirect, ses
 from werkzeug.exceptions import abort
 from flask_paginate import Pagination, get_page_args
 import MySQLdb
-from user import dis_user,editDisplayname,editAboutme
+from user import dis_user,editDisplayname,editAboutme,list_of_user_date
 from tag import get_tags,get_tags_list
 from question import pagefunction,pagefunction2,pagefunction_number,pagefunction_number_all
-from question import showQuestion_byscore_help,sort_que_by_time,sort_que_by_time_number,sort_quesbyTag
-from particular_question import particular_que_from_id,answer_from_parent_id
-from particular_question import particular_que_from_id,answer_from_parent_id,score_question,put_answer
+from question import showQuestion_byscore_help,sort_que_by_time,sort_que_by_time_number,sort_quesbyTag,question_from_list_of_tag,question_from_list_of_tag_number
+# from particular_question import particular_que_from_id,answer_from_parent_id
+from particular_question import particular_que_from_id,answer_from_parent_id,score_question,put_answer,sort_ans_by_time
 from particular_question import one_ans
+from api import api
+import json
 
-# from user import check_login
 import re
+# from user import check_login
 # from flask_socketio import SocketIO
 app = Flask(__name__)
 # socketio=SocketIO(app)
@@ -25,14 +27,35 @@ def requestConnection():
 
 def requestCursor(conn):
     return conn.cursor()
+
+
+
 app.config['SECRET_KEY'] = 'your secret key'
 
+
+@app.route('/user/<int:id>',methods=['GET'])
+def user_by_id(id):
+    x = dis_user(id)
+    # print(x)
+    return(dict(enumerate(x)))
+
+@app.route('/users/<int:page>',methods=['GET'])
+def users_by_id(page):
+    offset = 6*(page-1)
+    x = list_of_user_date(page,True,False,False,False)
+    return(dict(enumerate(x)))
 
 @app.route('/tag/<int:per_page>/<int:page>',methods=['GET'])
 def tag_page(per_page,page):
     offset = 6*(page-1)
     pagination_users,total=get_tags(offset=offset,per_page=6)
     return dict(enumerate(pagination_users))
+
+@app.route('/ml/<string:query>',methods=['GET'])
+def ml(query):
+    l = api(query)
+    return dict(enumerate(l))
+    # return ""
 
 @app.route('/tag/number',methods=['GET'])
 def tag_page_number():
@@ -44,6 +67,19 @@ def tag_list():
     l=[ {'value':x[0],'label':x[0]} for x in get_tags_list()]
     # print(l)
     return dict(enumerate(l))
+
+@app.route('/search/<int:page>/<string:query>',methods=['POST'])
+def search(page,query):
+    taglist  = request.get_json()['Taglist']
+    if taglist == {} : return {}
+    l= question_from_list_of_tag(list(taglist.values()),page) # error in this function as wrong total question no. is coming
+    return dict(enumerate(l))    
+
+@app.route('/search/number/<string:query>',methods=['POST'])
+def search_number(query):
+    taglist  = request.get_json()['Taglist']
+    l= question_from_list_of_tag_number(list(taglist.values()))
+    return str(l)   
 
 
 @app.route('/<string:tag>/<int:page>/time/question',methods=['GET'])
@@ -57,12 +93,14 @@ def display_question_score(tag,page): # took care when question is less than 3
 def display_question(tag,page): # took care when question is less than 3
     ans=sort_quesbyTag(tag,page)
     # print(ans)
+    print(len(ans),"hellobye")
     return dict(enumerate(ans))
 
-
+# error here as pagefunction_number isn't called
 @app.route('/<string:tag>/question/number',methods=['GET'])
 def display_question_number(tag): # took care when question is less than 3
-    ans=pagefunction_number(tag=tag)
+    ans=pagefunction_number(tag)
+    # print(ans,"hellosatyam")
     return str(ans)
 
 # @app.route('/question/number',methods=['GET'])
@@ -127,7 +165,6 @@ def create():
             content = request.get_json()['Body']
             tag = request.get_json()['Tag'] # take care of how to get particular tag from list of tags
             tag_list = [x["value"] for x in tag]
-            print("@@@@@@@@@@@@@@@@@@@@@",tag_list)
             # tag = "" # take care of how to get particular tag from list of tags
             # tag_list=tag.split()
             conn = requestConnection()
@@ -214,8 +251,8 @@ def register():
 # Remember to remove duplicacy from account
         if account:
             msg = 'Account already exists!'
-        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-            msg = 'Invalid email address!'
+        # elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+        #     msg = 'Invalid email address!'
         # elif not re.match(r'[A-Za-z0-9]+', username):
         #     msg = 'Username must contain only characters and numbers!'
         elif not username or not password or not email:
@@ -251,6 +288,30 @@ def show_user():
 @app.route('/<int:id>/upscore',methods=['PUT','GET'])
 def up_score(id):
     print("..............",id)
+    conn = requestConnection()
+    cursor = requestCursor(conn)
+    # start editing
+    sql1 = "SELECT JSON_EXTRACT(my_list, '$') AS list FROM help where id = " + str(id)
+    # sql1 = "SELECT JSON_EXTRACT(my_list, '$') AS list FROM help where id = " + str(id)
+    l=cursor.execute(sql1)
+    l=cursor.fetchall()
+    print(l)
+    my_list=[]
+    if l!=():
+      l =(l[0][0])
+      my_list = json.loads(l, parse_int=int) # this list my_list guves the list of id of all user who have voted it up or down
+    loged_in_user_id = session['id']
+    if loged_in_user_id in my_list and my_list!=[]:
+        command = "You can Vote only once"
+    else:
+        # ALlow to upvote or downvote
+        my_list.append(loged_in_user_id)
+        sql2 = "INSERT INTO help (id, my_list)VALUES (%s, %s)"
+        cursor.execute(sql2,(2,json.dumps(my_list),))
+
+    conn.commit()
+    cursor.close()
+    #end editing
     if 'loggedin' in session:
         l=score_question(1,id)
         return str(l)
@@ -267,15 +328,18 @@ def down_score(id):
 
 @app.route('/<int:id>/upans',methods=['PUT','GET'])
 def up_ans(id):
+    
     if 'loggedin' in session:
-    # l,n,ans_list,m=score_answer(1,id)
       return str(one_ans(1,id))
+    else:
+        return "first logged in"
 
 @app.route('/<int:id>/downans',methods=['PUT','GET'])
 def down_ans(id):
     if 'loggedin' in session:
-    # l,n,ans_list,m=score_answer(1,id)
       return str(one_ans(-1,id))
+    else:
+        return "first logged in"
 
 @app.route('/<int:id>/new_ans',methods=['POST','GET'])
 def newanswer(id):
@@ -300,11 +364,12 @@ def Update_name(name):
     else:
         return "first logged in"
 
-@app.route('/user/aboutme')
-def Update_About(body):
+@app.route('/user/aboutme',methods=['POST'])
+def Update_About():
+    body = request.get_json()['About']
     if 'loggedin' in session:
         id=session['id']
-        editAboutme(id,name)
+        editAboutme(id,body)
         return "True"
     else:
         return "first logged in"
@@ -312,13 +377,13 @@ def Update_About(body):
 @app.route('/<int:id>/score/ans',methods=['GET'])
 def showAns_byscore(id):
     l,n,ans_list,m=sort_ans_by_time(id,0)
-    return render_template('particular_question.html',l=l,n=n,ans_list=ans_list,m=m)
+    return dict(enumerate(ans_list[::-1]))
 
 @app.route('/<int:id>/time/ans',methods=['GET'])
 def sort_ans_by_time_main(id):
     l,n,ans_list,m=sort_ans_by_time(id,1)
-    return render_template('particular_question.html',l=l,n=n,ans_list=ans_list,m=m)    
+    return dict(enumerate(ans_list[::-1]))
 
 
 if __name__=="__main__":
-    app.run(host='0.0.0.0',debug=True,port=4001)
+    app.run(host='0.0.0.0',debug=True,port=4005)

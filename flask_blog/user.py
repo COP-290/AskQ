@@ -15,7 +15,7 @@ def requestConnection():
     mydb = MySQLdb.connect(host='localhost',
     user='root',
     passwd='root',
-    db='test')
+    db='askq')
     return mydb
 
 def requestCursor(conn):
@@ -38,12 +38,15 @@ def dis_user(id):
         # about=cursor.fetchone()
         detail=cursor.execute('SELECT * from User where ID = ' + str(id))
         detail=cursor.fetchone()
-        date = date[0]
-        d = date.day
-        mth = date.month
-        ye = date.year
-        # print(profile[0])
-        date = str(d) + "/" + str(mth) + "/"+ str(ye)
+        if date:
+            date = date[0]
+            d = date.day
+            mth = date.month
+            ye = date.year
+            # print(profile[0])
+            date = str(d) + "/" + str(mth) + "/"+ str(ye)
+        else:
+            date=""
         cursor.close()
         conn.close()
         return (date,detail)
@@ -58,11 +61,31 @@ def editDisplayname(id,name):
     conn.close()
     return "Done"
 
-def editAboutme(id,s):
+def editAboutme(id,name):
     conn = requestConnection()
     cursor = requestCursor(conn)
-    p=cursor.execute('Update User set About_me='+str(name)+' where Id= '+str('id'))
+    p=cursor.execute('Update User set About_me="'+str(name)+'" where Id= '+str(id))
     conn.commit()
     cursor.close()
     conn.close()
     return "Done"
+
+def list_of_user_date(page,date,upvote,downvote,reputation):
+    conn = requestConnection()
+    cursor = requestCursor(conn)
+    offset=(page-1)*30
+    if date:
+        p=cursor.execute('select * from User order by Creation_Date limit 30 offset '+str(offset))
+        p=cursor.fetchall()
+    elif upvote:
+        p=cursor.execute('select * from User order by up_votes limit 30 offset '+str(offset))
+        p=cursor.fetchall()
+    elif downvote:
+        p=cursor.execute('select * from User order by down_votes limit 30 offset '+str(offset))
+        p=cursor.fetchall()
+    else:
+        p=cursor.execute('select * from User order by reputation limit 30 offset '+str(offset))
+        p=cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return list(p)
