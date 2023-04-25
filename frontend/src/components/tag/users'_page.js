@@ -52,10 +52,10 @@ export default function User() {
                     </form>
                 </div>
             </div>
-            <div class="row d-flex flex row m-3">
+            <div class="row user_row d-flex flex row m-3">
             {data?
             Object.entries(data).map(([key,value])=>
-            <div class="tag_col col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 p-3" onClick={()=>to(`user/${value[0]}`)}>
+            <div class="tag_col col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 d-flex justify-content-center" onClick={()=>to(`user/${value[0]}`)}>
             <div class="user_box p-3">
                 <div class="user_pic d-flex justify-content-center" style={{"font-family": "'Roboto Mono', monospace"}}>
                     <div>

@@ -8,8 +8,8 @@ export default function About() {
         <div class="row d-flex justify-content-center">
           <div class="col-10 col-sm-8 col-lg-6">
             <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style={{"visibility": "visible", "animation-delay": "0.2s", "animation-name": "fadeInUp;"}}>
-              <h3>Our Creative <span> Team</span></h3>
-              <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
+              <h3 style={{"font-weight":"Bold !important"}}>Our Creative <span> Team</span></h3>
+              <p style={{"color":"6e6e73 !important"}}>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
               <div class="line"></div>
             </div>
           </div>

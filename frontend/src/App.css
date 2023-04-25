@@ -571,15 +571,20 @@ inst1{
   }
   .user_box{
     border: solid 1.5px #ffffff; 
-    border-radius: 5px; 
+    border-radius: 20px; 
     color:#6e6e73; 
     word-wrap: break-word; 
     height:auto ;
+    width:100% !important;
     font-size: large;
     cursor: pointer;
     background-color:#ffffff;
     box-shadow: 2px 4px 12px rgba(0,0,0,.08) !important;
     font-weight: 500 !important;
+}
+.user_row{
+    row-gap:20px;
+    /* column-gap:0px; */
 }
 .user_box:hover{
     transform: scale(1.01);
