@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Tag1 from './components/tag/tag1';
 import Tag from './components/tag/tag';
-import Navbar from './components/tag/nav';
+import Navbar from './components/tag/navbar';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Par_ques from './components/tag/particular_question';
 import Par_test from './components/tag/particular_test';
