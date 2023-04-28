@@ -3,18 +3,9 @@
     color:#E7E4DF;
     width:fit-content !important;
 }
-
-.q_body{
-    height:400px
-}
 .q_title{
-
-    width:95% !important;
-    
+    width:95% !important; 
     border-radius: 4px !important;
-}
-.tag_btn{
-    height:fit-content;
 }
 .no_answer{
     font-size: 25px;
@@ -26,22 +17,6 @@
 }
 .tag_questions{
     color:#1d1d1f;
-}
-.tag_btn:hover{
-    color:#3A4D3A !important;
-    background-color:rgb(255, 243, 213)!important;
-    border-color: #3A4D3A!important;
-}
-.answer_box{
-    border-color:rgb(88, 88, 88); 
-    border: solid 1.5px ; 
-    border-radius: 5px; 
-    color:#3A4D3A; 
-    word-wrap: break-word; 
-    height:fit-content;
-    font-size: 20px;
-    box-shadow: 2px 4px 12px rgba(0,0,0,.08) !important;
-    cursor: pointer;
 }
 .ans_body{
     height:350px
@@ -72,8 +47,9 @@
     background-color: #1d1d1f !important;
     color:#ffffff !important;
     border-color: #ffffff !important;
+    font-weight: 500;
 }
-:disabled {
+:disabled{
     background-color:rgb(220, 220, 220) !important;
 }
 .aboutme_box{
@@ -89,11 +65,6 @@
     border-radius: 10px;
     color:#6e6e73 !important;
     word-wrap: break-word !important;
-}
-.answer_box{
-    font-size: large !important;
-    border-radius: 10px;
-    background-color: #3A4D3A;
 }
 .like_box{
     border: solid 1.5px #f5f5f7 !important;
@@ -111,19 +82,8 @@
     width:85%;
     box-shadow: 2px 4px 12px rgba(0,0,0,.08) !important;
 }
-.vav {
+.vav{
     border-radius: 4px;
-}
-.question_box:hover .tag_btn{
-  color:#3A4D3A !important;
-  background-color:rgb(255, 243, 213)!important;
-  border-color: #3A4D3A!important;
-}
-.tag_btn:hover {
-  transform: scale(1.005);
-  transition: transform 0.25s ease-in-out;
-  color:#3A4D3A !important;
-  background-color:rgb(255, 243, 213)!important;
 }
 .num_button{
     color:#6e6e73 !important;
@@ -134,9 +94,10 @@
     row-gap:15px;
     column-gap:4px !important;
 }
-/* Navbar */
 .navbar{
     height:auto;
+    border-bottom:1px solid;
+    border-color:black;
 }
 .site_icon:hover {
     color: #1d1d1f !important;
@@ -153,9 +114,6 @@
 .nav-link:hover {
     background-color: #1d1d1f;
     color:#ffffff !important;
-}
-.navbar{
-    border-bottom:1px solid;border-color:black;
 }
 .navbar-brand{
     font-size: 40px;color: #1d1d1f !important;
@@ -175,26 +133,6 @@
 .user_ppp:hover a{
     color: #6e6e73 !important;
 }
-
-/* Navber */
-
-/* ----------------------------------------------------------------------------------------------------------- */
-
-/* About */
-.quote_box{
-    
-    background-color: #E7E4DF !important;
-    color:#3A4D3A; 
-    border:solid 1.5px !important;
-    border-color:#3A4D3A !important;
-    border-radius:7px;
-    width:400px;
-}
-/* About */
-
-/* ----------------------------------------------------------------------------------------------------------- */
-
-/* Tag */
 .page_title{
     font-size:xxx-large; color:#1d1d1f;
 }
@@ -265,6 +203,9 @@ body,html {
     border-color: #d2d2d7 !important;
     background-color: rgba(255, 255, 255, 0.8) !important;
 }
+.nav_search_box{
+    width:500px;
+}
 .tag_box_tag{
     border: solid 1.5px #ffffff; 
     border-radius: 15px; 
@@ -304,17 +245,11 @@ body,html {
     background-color: #ffffff !important;
     color: #1d1d1f;
 }
-
 .disabled .page-link{
     background-color:  #6e6e73 !important; 
     color:#ffffff !important;
     border-color: #f5f5f7 !important;
 }
-
-/* Tag */
-
-/* ----------------------------------------------------------------------------------------------------------- */
-
 .sign_up_box{
     background-color: white !important; 
     border:solid 1.5px !important;
@@ -353,7 +288,6 @@ a:hover{
     color:#ffffff !important;
 }
 
-/* ------------------------------------------------------------------- */
 /* About Page */
     .single_advisor_profile {
         position: relative;
@@ -487,6 +421,7 @@ a:hover{
         color: #ffffff;
     }
 /* About Page */
+
 .error_line{
     font-size:x-large;
 }   
@@ -517,9 +452,6 @@ pre{
     border-radius: 10px;
     padding: 10px;
 }
-
-
-/* Main Root Page ||||||||||||||||||||||||||||||||||||||| */
 .main_lines{
     color: #1d1d1f;
     font-size: x-large;
@@ -542,8 +474,7 @@ pre{
     width: fit-content;
     word-wrap:break-word;
     padding: 7px;
-    box-shadow: 2px 4px 12px rgba(0,0,0,.08) !important;
-    
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08) !important;    
 }
 .main_row{
     word-wrap:break-word;
@@ -568,8 +499,8 @@ inst1{
 @font-face {
     font-family: applefont;
     src: url(https://www.apple.com/wss/fonts?families=SF+Pro,v3:200,300,400,500,600|SF+Pro+Icons,v3|Apple+Monochrome+Emoji,v3|Apple+Monochrome+Emoji+Ind,v2|Graphik,v1);
-  }
-  .user_box{
+}
+.user_box{
     border: solid 1.5px #ffffff; 
     border-radius: 20px; 
     color:#6e6e73; 
@@ -584,7 +515,6 @@ inst1{
 }
 .user_row{
     row-gap:20px;
-    /* column-gap:0px; */
 }
 .user_box:hover{
     transform: scale(1.01);
@@ -596,9 +526,6 @@ inst1{
 }
 .user_reputation{
     color:#1d1d1f;
-}
-.btn-success{
-    font-weight: 500;
 }
 .carousel{
     border-radius: 10px !important;
