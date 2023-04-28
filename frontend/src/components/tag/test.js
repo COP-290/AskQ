@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-
 export default function Test(){
     const [data, setdata] = useState({
         name: "",
@@ -8,7 +7,6 @@ export default function Test(){
         date: "",
         programming: "",
     });
-  
     // Using useEffect for single rendering
     function api(){
         // Using fetch to fetch the api from 
@@ -27,15 +25,9 @@ export default function Test(){
             .then(function(response){ 
             return response.json()})
             .then(function(data)
-            {console.log(data)
-            // title=document.getElementById("title")
-            // body=document.getElementById("bd")
-            // title.innerHTML = data.title
-            // body.innerHTML = data.body  
+            {console.log(data) 
           }).catch(error => console.error('Error:', error)); 
-
     }
-
     useEffect(() => {
         // Using fetch to fetch the api from 
         // flask server it will be redirected to proxy
@@ -55,10 +47,6 @@ export default function Test(){
     function api(){
         fetch('/tag/6/2', {
             method: 'GET',
-            // body: JSON.stringify({
-            //   title:"name",
-            //   body:"body",
-            // }),
             headers: {
               'Content-type': 'application/json; charset=UTF-8',
             }
@@ -70,12 +58,11 @@ export default function Test(){
           }).catch(error => console.error('Error:', error)); 
 
     }
-  
+
     return (
         <div className="App">
             <header className="App-header">
                 <button onClick={api}>API</button>
-  
             </header>
         </div>
     );

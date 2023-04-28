@@ -1,8 +1,9 @@
 import {useState,useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 export default function Ans({value:value}){
-    
-    const [score,setScore] = useState(0);
+    // console.log(value)
+  const [user,setUser] = useState(null);
+  const [score,setScore] = useState(0);
    
     let navigate = useNavigate();
     const to = async (id) => {
@@ -21,6 +22,7 @@ export default function Ans({value:value}){
       fetch(`/${value[0]}/upans`).then((res) =>
       res.json().then((data) => {
         console.log(data);
+        if (data===score){alert("Already Voted")}
         setScore(data)
       })
       );
@@ -37,6 +39,7 @@ export default function Ans({value:value}){
       fetch(`/${value[0]}/downans`).then((res) =>
       res.json().then((data) => {
         console.log(data);
+        if (data===score){alert("Already Voted")}
         setScore(data)
       })
       );
@@ -45,6 +48,16 @@ export default function Ans({value:value}){
     useEffect(() => {
       setScore(value[4])  
   },[value]);
+
+  useEffect(() => {
+    if (value){    fetch(`/user/${value[1]}`).then((res) =>
+            res.json().then((data) => {
+              console.log(data)
+              setUser(data[1])
+              console.log(data[1]);
+            })
+        );}
+      },[value]);   
 
     return(
 <>
@@ -76,14 +89,16 @@ export default function Ans({value:value}){
                 <div  class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mt-3 justify-content-center post_data_box">
                   <div class="row px-2 d-flex">
                     <div class="post_title">
-                        Posted by :- 
+                        Posted by :- {user?user[1]:"Anonymous"}
                     </div>
                     <div class="user_p4" >
                         <div class="d-flex justify-content-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                            </svg>
+                        {user&&user[9]?<img onClick={()=>to(`user/${user[0]}`)} src={user[9]} width="50" height="50" style={{"border-radius":"50%","cursor":"pointer"}}></img>:              
+                <svg onClick={()=>{if (user) to(`user/${user[0]}`)}} xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                </svg>
+            }
                         </div>
                     </div>
                     <div class="row px-2 d-flex flex-column">

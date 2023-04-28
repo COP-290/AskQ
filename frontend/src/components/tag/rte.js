@@ -4,7 +4,6 @@ import JoditEditor from 'jodit-react';
 const Example = ({ placeholder }) => {
 	const editor = useRef(null);
 	const [content, setContent] = useState('');
-
 	const config = useMemo(
 		{
 			readonly: false, // all options from https://xdsoft.net/jodit/docs/,
@@ -12,7 +11,6 @@ const Example = ({ placeholder }) => {
 		},
 		[placeholder]
 	);
-
 	return (
 		<JoditEditor
 			ref={editor}
@@ -20,7 +18,7 @@ const Example = ({ placeholder }) => {
 			config={config}
 			tabIndex={1} // tabIndex of textarea
 			onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-			onChange={newContent => {}}
+			onChange={newContent => { }}
 		/>
 	);
 };

@@ -32,56 +32,67 @@ export default function Search() {
 
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-  fetch(`/search/${page}/${location.state.query}`, {
-    method: 'POST',
-    body: JSON.stringify({
-      'Taglist':taglist,
-    }),
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
-    }
-  })
-  .then(function(response){ 
+  // fetch(`/search/${page}/${location.state.query}`, {
+  //   method: 'POST',
+  //   body: JSON.stringify({
+  //     'Taglist':taglist,
+  //   }),
+  //   headers: {
+  //     'Content-type': 'application/json; charset=UTF-8',
+  //   }
+  // })
+  // .then(function(response){ 
 
-      return response.json()})
-      .then(function(data)
-      {setdata(data);
-        console.log(data)
-    }).catch(error => console.error('Error:', error)); 
-  }, 
+  //     return response.json()})
+  //     .then(function(data)
+  //     {setdata(data);
+  //       console.log(data)
+  //   }).catch(error => console.error('Error:', error)); 
+  // }, 
   
-  [page,taglist]
-  );
+  // [page,taglist]
+  // );
 
-useEffect(() => {
-  console.log(taglist);
-  fetch(`/search/number/${location.state.query}`, {
-    method: 'POST',
-    body: JSON.stringify({
-      'Taglist':taglist,
-    }),
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
-    }
-  })
-  .then(function(response){ 
+// useEffect(() => {
+//   console.log(taglist);
+//   fetch(`/search/number/${location.state.query}`, {
+//     method: 'POST',
+//     body: JSON.stringify({
+//       'Taglist':taglist,
+//     }),
+//     headers: {
+//       'Content-type': 'application/json; charset=UTF-8',
+//     }
+//   })
+//   .then(function(response){ 
 
-      return response.json()})
-      .then(function(data)
-      {setNumber(parseInt(data));
-        console.log(number)
-    }).catch(error => console.error('Error:', error)); 
+//       return response.json()})
+//       .then(function(data)
+//       {setNumber(parseInt(data));
+//         console.log(number)
+//     }).catch(error => console.error('Error:', error)); 
 
     
-}, [taglist]); 
+// }, [taglist]); 
 
-  async function callml(){
-  await fetch(`/ml/${location.state.query}`).then((res) =>
+
+useEffect(() => {
+  fetch(`/question/number`).then((res) =>
       res.json().then((data) => {
           console.log(data);
-          setTaglist(data)
+          setNumber(parseInt(data))
+      })
+  );
+}, []); 
+
+  async function callml(){
+  await fetch(`/ml/${page}/${location.state.query}`).then((res) =>
+      res.json().then((data) => {
+          console.log(data);
+          setTaglist(data['lst'])
+          setdata(data['q'])
       })
   );
   setLoading(false)
@@ -90,7 +101,7 @@ useEffect(() => {
 useEffect(() => {
   setLoading(true);
   callml()
-}, [location.state.query]); 
+}, [location.state.query,page]); 
 
     return (
       
@@ -106,7 +117,7 @@ useEffect(() => {
 <>
 
       <div class="row py-2 d-flex flex-row justify-content-center">
-        {number===0?"No Results! Please try a longer search query":"Tags Matched:"}
+        {data==='false'?"No Results! Please try a longer search query":"Tags Matched:"}
           <div class="d-flex flex-row flex-wrap justify-content-center px-2 pt-3" style={{"row-gap": "15px","column-gap":"4px"}}>
             {taglist?  Object.entries(taglist).map(([key,val])=>
             <div class="  justify-content-start">
@@ -158,7 +169,7 @@ useEffect(() => {
   </div>  
 </div> */}
 
-{data?  Object.entries(data).map(([key,value])=>
+{(data!="false")?  Object.entries(data).map(([key,value])=>
 
   <div class="col-12 d-flex justify-content-end py-2 px-4">
     <div class="question_box p-3">
@@ -223,7 +234,7 @@ useEffect(() => {
 )
 
 :<></>}
-
+{data==='false'?<></>:
     <div class="pagination d-flex justify-content-center" >
         <PaginationControl
             page={page}
@@ -236,7 +247,7 @@ useEffect(() => {
             }}
             ellipsis={1}
         />
-    </div>
+    </div>}
 </>}
 </div>
 
