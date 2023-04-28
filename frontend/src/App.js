@@ -13,15 +13,12 @@ import Profile from './components/tag/profile';
 import Login from './components/tag/login';
 import Signup from './components/tag/sign_up';
 import About from './components/tag/about';
-// import WebSocketCall from './components/tag/socket';
-// import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import Fzf from './components/tag/404';
 import Main from './components/tag/main';
 import Search from './components/tag/search';
 import User from './components/tag/users\'_page';
 import Par_user from './components/tag/par_user';
-
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -35,64 +32,31 @@ function App() {
     }
   };
 
-  // useEffect(() => {
-  //   if (buttonStatus === true) {
-  //     const socket = io("localhost:5001/", {
-  //       transports: ["websocket"],
-  //       cors: {
-  //         origin: "http://localhost:3000/",
-  //       },
-  //     });
-
-  //     setSocketInstance(socket);
-
-  //     socket.on("connect", (data) => {
-  //       console.log(data);
-  //     });
-
-  //     setLoading(false);
-
-  //     socket.on("disconnect", (data) => {
-  //       console.log(data);
-  //     });
-
-  //     return function cleanup() {
-  //       socket.disconnect();
-  //     };
-  //   }
-  // }, [buttonStatus]);
-
   return (
     <>
-        
-
-        <Router>
-          <Routes>
-            <Route path="/tag1" element={<><Navbar/><Tag1/></>} />        
-            {/* <Route path="/socket" element={<WebSocketCall/>} />         */}
-            <Route path="/" element={<><Navbar/><Main/></>} />
-            <Route path="/about" element={<><Navbar/><About/></>} />        
-            <Route path="/tag" element={<><Navbar/><Tag/></>} />        
-            <Route path="/tag/:id" element={<><Navbar/><Question/> </>} />        
-            <Route path="/test" element={<><Navbar/><Test/></>} />        
-            <Route path="/particular_question" element={<><Navbar/><Par_ques/></>} />        
-            <Route path="/particular_test" element={<><Navbar/><Par_test/></>} />        
-            <Route path="/new_question" element={<><Navbar/><New_ques/></>} />        
-            <Route path="/question/:id" element={<><Navbar/><Par_ques/></>} />        
-            <Route path="/question" element={<><Navbar/><Question/></>} />        
-            <Route path="/search" element={<><Navbar/><Search/></>} />        
-            <Route path="/profile" element={<><Navbar/><Profile/></>} />        
-            <Route path="/login" element={<><Navbar/><Login/></>} />        
-            <Route path="/signup" element={<><Navbar/><Signup/></>} />
-            <Route path="/user" element={<><Navbar/><User/></>} />
-            <Route path="/user/:id" element={<><Navbar/><Par_user/></>} /> 
-            <Route path="/:id" element={<Fzf/>} />       
-          </Routes>
-        </Router>
-
-
-</>
+      <Router>
+        <Routes>
+          <Route path="/tag1" element={<><Navbar/><Tag1/></>} />        
+          <Route path="/" element={<><Navbar/><Main/></>} />
+          <Route path="/about" element={<><Navbar/><About/></>} />        
+          <Route path="/tag" element={<><Navbar/><Tag/></>} />        
+          <Route path="/tag/:id" element={<><Navbar/><Question/> </>} />        
+          <Route path="/test" element={<><Navbar/><Test/></>} />        
+          <Route path="/particular_question" element={<><Navbar/><Par_ques/></>} />        
+          <Route path="/particular_test" element={<><Navbar/><Par_test/></>} />        
+          <Route path="/new_question" element={<><Navbar/><New_ques/></>} />        
+          <Route path="/question/:id" element={<><Navbar/><Par_ques/></>} />        
+          <Route path="/question" element={<><Navbar/><Question/></>} />        
+          <Route path="/search" element={<><Navbar/><Search/></>} />        
+          <Route path="/profile" element={<><Navbar/><Profile/></>} />        
+          <Route path="/login" element={<><Navbar/><Login/></>} />        
+          <Route path="/signup" element={<><Navbar/><Signup/></>} />
+          <Route path="/user" element={<><Navbar/><User/></>} />
+          <Route path="/user/:id" element={<><Navbar/><Par_user/></>} /> 
+          <Route path="/:id" element={<Fzf/>} />       
+        </Routes>
+      </Router>
+    </>
   );
 }
-
 export default App;
