@@ -1,9 +1,6 @@
 
-from flask import Flask, render_template, request, url_for, flash, redirect
-from werkzeug.exceptions import abort
-from flask_paginate import Pagination, get_page_args
 import MySQLdb
-app=Flask(__name__)
+import json
 
 def requestConnection():
     mydb = MySQLdb.connect(host='localhost',
@@ -15,29 +12,6 @@ def requestConnection():
 def requestCursor(conn):
     return conn.cursor()
 
-# def question_from_id(id): # output list of all questions from a given id
-#     conn=requestConnection()
-#     cursor=requestCursor(conn)
-#     l=cursor.execute('SELECT * FROM Question where id = ' + str(id))
-#     l=cursor.fetchall()
-#     M = []
-#     for i in l:
-#         M.append(i)
-#     cursor.close()
-#     conn.close()
-#     return list(M)
-# def questionTag_from_id(id): # list of tag from question id
-#     conn=requestConnection()
-#     cursor=requestCursor(conn)
-#     l=cursor.execute('SELECT tags FROM Tag where id = ' + str(id))
-#     l=cursor.fetchall()
-#     tag_list=[]
-#     # print(l)
-#     for k in range(0,len(l)):
-#         tag_list.append(l[k][0])
-#     cursor.close()
-#     conn.close()
-#     return tag_list
 
 def particular_que_from_id(id):
     conn=requestConnection()
@@ -51,8 +25,7 @@ def particular_que_from_id(id):
     cursor.close()
     conn.close()
     return a
-# print(answer_from_id())
-# print(particular_que_from_id(80))
+
 
 def answer_from_parent_id(id):
     conn = requestConnection()
@@ -82,36 +55,8 @@ def score_question(Up,id):
         cursor.close()
         conn.close()
         l=particular_que_from_id(id)
-        # n=1
-        # ans_list=answer_from_parent_id(id)
-        # m=len(ans_list)
-        # return l,n,ans_list,m 
         return l[0][3]
 
-# def score_answer(Up,id):
-#         conn = requestConnection()
-#         cursor = requestCursor(conn)
-#         cursor.execute('select Score from Answer where id='+str(id))
-#         score=cursor.fetchone()
-#         cursor.execute('Update Answer set Score= '+str(score[0]+Up)+' where Id='+str(id))
-#         Ownerid=cursor.execute('select Owner_User_Id,Score from Answer where Id= '+str(id))
-#         Ownerid=cursor.fetchone()
-#         ownscore=Ownerid[1]
-#         Ownerid=Ownerid[0]
-#         if Up==1:
-#           cursor.execute('Update User set up_votes='+str(ownscore+Up)+' where id='+str(Ownerid))
-#         else:
-#             cursor.execute('Update User set down_votes='+str(ownscore+Up)+' where id='+str(Ownerid))
-#         conn.commit()
-#         cursor.execute('select Parent_Id from Answer where id='+str(id))
-#         Pid=cursor.fetchone()
-#         l=particular_que_from_id(Pid[0])
-#         n=1
-#         ans_list=answer_from_parent_id(Pid[0])
-#         m=len(ans_list)
-#         cursor.close()
-#         conn.close()
-#         return l,n,ans_list,m 
 
 def sort_ans_by_time(id,time):
     conn = requestConnection()
@@ -131,27 +76,17 @@ def sort_ans_by_time(id,time):
     conn.close()
     return l,n,Answer_list,m 
 
-# def put_answer(id,body): #has to correct this function
 def put_answer(id,ownerid,body):
     if body!="":
         conn = requestConnection()
         cursor = requestCursor(conn)
-        # l=particular_que_from_id(id)
-        # n=1 
         cursor.execute('insert into Answer (Owner_User_Id,Parent_ID,Score,Body) Values ("%s","%s","%s","%s")',(ownerid,id,0,body))
-        # cursor.execute('insert into Answer (Parent_ID,Score,Body) Values ("%s","%s","%s")',(id,0,body))
         conn.commit()
         cursor.close()
         conn.close()
-        # ans_list=answer_from_parent_id(id)
-        # m=len(ans_list)
-        # return l,n,ans_list,m 
         return ""
     else:
         return ""
-
-
-# print(answer_from_parent_id(80))
 
 
 def one_ans(Up,id):
@@ -172,3 +107,68 @@ def one_ans(Up,id):
         cursor.close()
         conn.close()
         return score[0]+Up
+
+
+def check_score_count(id,userid,up):
+        conn = requestConnection()
+        cursor = requestCursor(conn)
+        l = cursor.execute("SELECT JSON_EXTRACT(my_list, '$') AS list FROM help where id = " + str(id))
+        l=cursor.fetchall()
+        my_list=[]
+        if l!=():
+          l =(l[0][0])
+          my_list = json.loads(l, parse_int=int) 
+        loged_in_user_id = userid
+        my_list = list(my_list)
+        if loged_in_user_id in my_list and my_list!=[]:
+            command = "You can Vote only once"
+            l=score_question(0,id)
+            return str(l)
+        else:
+            my_list.append(loged_in_user_id)
+            sql3 = "DELETE FROM help WHERE id = " + str(id)
+            cursor.execute(sql3)
+            conn.commit()
+            sql2 = "INSERT into help  (id, my_list) VALUES (%s, %s)"
+            cursor.execute(sql2,(id,json.dumps(my_list),))
+            conn.commit()
+            cursor.close()
+            l=score_question(up,id)
+            return str(l)
+
+def check_score_count_answer(id,userid,up):
+        conn = requestConnection()
+        cursor = requestCursor(conn)
+        l = cursor.execute("SELECT JSON_EXTRACT(my_list, '$') AS list FROM help where id = " + str(id))
+        l=cursor.fetchall()
+        my_list=[]
+        if l!=():
+          l =(l[0][0])
+          my_list = json.loads(l, parse_int=int) 
+        loged_in_user_id = userid
+        my_list = list(my_list)
+        if loged_in_user_id in my_list and my_list!=[]:
+            command = "You can Vote only once"
+            return str(one_ans(0,id))
+        else:
+            my_list.append(loged_in_user_id)
+            sql3 = "DELETE FROM help WHERE id = " + str(id)
+            cursor.execute(sql3)
+            conn.commit()
+            sql2 = "INSERT into help  (id, my_list) VALUES (%s, %s)"
+            cursor.execute(sql2,(id,json.dumps(my_list),))
+            conn.commit()
+            cursor.close()
+            return str(one_ans(up,id))
+
+
+def ask_question(title,content,tag,tag_list):
+    conn = requestConnection()
+    cursor = requestCursor(conn)
+    cursor.execute('INSERT INTO Question (Title, Body,Owner_User_Id,Score) VALUES ("%s","%s", "%s","%s")',(title, content,session['id'],0))
+    conn.commit()
+    for k in tag_list:
+            cursor.execute('INSERT INTO Tag (ID,tags) VALUES ("%s", "%s")',(total,k))
+            conn.commit()
+    cursor.close()
+    conn.close()

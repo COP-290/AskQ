@@ -1,15 +1,5 @@
-from flask import Flask, render_template, request, url_for, flash, redirect, session
-from werkzeug.exceptions import abort
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_paginate import Pagination, get_page_args
+
 import MySQLdb
-from tag import get_tags
-from question import pagefunction
-from question import showQuestion_byscore_help,sort_que_by_time
-# from particular_question import particular_que_from_id,answer_from_parent_id,score_question,score_answer,sort_ans_by_time
-# from user import check_login
-import re
-app = Flask(__name__)
 
 def requestConnection():
     mydb = MySQLdb.connect(host='localhost',
@@ -20,7 +10,6 @@ def requestConnection():
 
 def requestCursor(conn):
     return conn.cursor()
-app.config['SECRET_KEY'] = 'your secret key'
 
 
 
@@ -43,7 +32,6 @@ def dis_user(id):
             d = date.day
             mth = date.month
             ye = date.year
-            # print(profile[0])
             date = str(d) + "/" + str(mth) + "/"+ str(ye)
         else:
             date=""

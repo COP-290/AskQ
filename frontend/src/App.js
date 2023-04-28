@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 import Fzf from './components/tag/404';
 import Main from './components/tag/main';
 import Search from './components/tag/search';
-import User from './components/tag/users\'_page';
+import User from './components/tag/users_page';
 import Par_user from './components/tag/par_user';
 
 function App() {
