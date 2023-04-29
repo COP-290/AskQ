@@ -109,66 +109,66 @@ def one_ans(Up,id):
         return score[0]+Up
 
 
-# def check_score_count(id,userid,up):
-#         conn = requestConnection()
-#         cursor = requestCursor(conn)
-#         l = cursor.execute("SELECT JSON_EXTRACT(my_list, '$') AS list FROM help where id = " + str(id))
-#         l=cursor.fetchall()
-#         my_list=[]
-#         if l!=():
-#           l =(l[0][0])
-#           my_list = json.loads(l, parse_int=int) 
-#         loged_in_user_id = userid
-#         my_list = list(my_list)
-#         if loged_in_user_id in my_list and my_list!=[]:
-#             command = "You can Vote only once"
-#             l=score_question(0,id)
-#             return str(l)
-#         else:
-#             my_list.append(loged_in_user_id)
-#             sql3 = "DELETE FROM help WHERE id = " + str(id)
-#             cursor.execute(sql3)
-#             conn.commit()
-#             sql2 = "INSERT into help  (id, my_list) VALUES (%s, %s)"
-#             cursor.execute(sql2,(id,json.dumps(my_list),))
-#             conn.commit()
-#             cursor.close()
-#             l=score_question(up,id)
-#             return str(l)
+def check_score_count(id,userid,up):
+        conn = requestConnection()
+        cursor = requestCursor(conn)
+        l = cursor.execute("SELECT JSON_EXTRACT(my_list, '$') AS list FROM help where id = " + str(id))
+        l=cursor.fetchall()
+        my_list=[]
+        if l!=():
+          l =(l[0][0])
+          my_list = json.loads(l, parse_int=int) 
+        loged_in_user_id = userid
+        my_list = list(my_list)
+        if loged_in_user_id in my_list and my_list!=[]:
+            command = "You can Vote only once"
+            l=score_question(0,id)
+            return str(l)
+        else:
+            my_list.append(loged_in_user_id)
+            sql3 = "DELETE FROM help WHERE id = " + str(id)
+            cursor.execute(sql3)
+            conn.commit()
+            sql2 = "INSERT into help  (id, my_list) VALUES (%s, %s)"
+            cursor.execute(sql2,(id,json.dumps(my_list),))
+            conn.commit()
+            cursor.close()
+            l=score_question(up,id)
+            return str(l)
 
-# def check_score_count_answer(id,userid,up):
-#         conn = requestConnection()
-#         cursor = requestCursor(conn)
-#         l = cursor.execute("SELECT JSON_EXTRACT(my_list, '$') AS list FROM help where id = " + str(id))
-#         l=cursor.fetchall()
-#         my_list=[]
-#         if l!=():
-#           l =(l[0][0])
-#           my_list = json.loads(l, parse_int=int) 
-#         loged_in_user_id = userid
-#         my_list = list(my_list)
-#         if loged_in_user_id in my_list and my_list!=[]:
-#             command = "You can Vote only once"
-#             return str(one_ans(0,id))
-#         else:
-#             my_list.append(loged_in_user_id)
-#             sql3 = "DELETE FROM help WHERE id = " + str(id)
-#             cursor.execute(sql3)
-#             conn.commit()
-#             sql2 = "INSERT into help  (id, my_list) VALUES (%s, %s)"
-#             cursor.execute(sql2,(id,json.dumps(my_list),))
-#             conn.commit()
-#             cursor.close()
-#             return str(one_ans(up,id))
+def check_score_count_answer(id,userid,up):
+        conn = requestConnection()
+        cursor = requestCursor(conn)
+        l = cursor.execute("SELECT JSON_EXTRACT(my_list, '$') AS list FROM help where id = " + str(id))
+        l=cursor.fetchall()
+        my_list=[]
+        if l!=():
+          l =(l[0][0])
+          my_list = json.loads(l, parse_int=int) 
+        loged_in_user_id = userid
+        my_list = list(my_list)
+        if loged_in_user_id in my_list and my_list!=[]:
+            command = "You can Vote only once"
+            return str(one_ans(0,id))
+        else:
+            my_list.append(loged_in_user_id)
+            sql3 = "DELETE FROM help WHERE id = " + str(id)
+            cursor.execute(sql3)
+            conn.commit()
+            sql2 = "INSERT into help  (id, my_list) VALUES (%s, %s)"
+            cursor.execute(sql2,(id,json.dumps(my_list),))
+            conn.commit()
+            cursor.close()
+            return str(one_ans(up,id))
 
 
-# def ask_question(title,content,tag,tag_list):
-#     conn = requestConnection()
-#     cursor = requestCursor(conn)
-#     cursor.execute('INSERT INTO Question (Title, Body,Owner_User_Id,Score) VALUES ("%s","%s", "%s","%s")',(title, content,session['id'],0))
-#     conn.commit()
-#     for k in tag_list:
-#             cursor.execute('INSERT INTO Tag (ID,tags) VALUES ("%s", "%s")',(total,k))
-#             conn.commit()
-#     cursor.close()
-#     conn.close()
+def ask_question(title,content,tag,tag_list):
+    conn = requestConnection()
+    cursor = requestCursor(conn)
+    cursor.execute('INSERT INTO Question (Title, Body,Owner_User_Id,Score) VALUES ("%s","%s", "%s","%s")',(title, content,session['id'],0))
+    conn.commit()
+    for k in tag_list:
+            cursor.execute('INSERT INTO Tag (ID,tags) VALUES ("%s", "%s")',(total,k))
+            conn.commit()
+    cursor.close()
+    conn.close()

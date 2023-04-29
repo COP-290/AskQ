@@ -13,33 +13,23 @@ from flask_blog.particular_question import particular_que_from_id,answer_from_pa
 class TestParticular_question(unittest.TestCase):
     def test_particular_que_from_id(self):
         x = particular_que_from_id(90)
-        # print(x)
-        # print(List)
         self.assertEqual((a1),x)
     
     def test_answer_from_parent_id(self):
         x = answer_from_parent_id(90)
-        # print(x)
-        # print(List)
         self.assertEqual((a2),x)
     
     def test_score_question(self):
-        x = score_question(0,90)
-        # print(x)
-        # print(List)
+        x = score_question(0,90) 
         self.assertEqual((a3),x)
 
     
     def test_sort_ans_by_time(self):
         x = put_answer(90,66,"")
-        # print(x)
-        # print(List)
         self.assertEqual((a4),x)
     
     def test_put_answer(self):
         x = one_ans(0,95)
-        # print(x)
-        # print(List)
         self.assertEqual((a5),x)
     
     

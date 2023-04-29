@@ -21,12 +21,6 @@ def dis_user(id):
         cursor = requestCursor(conn)
         cursor.execute('SELECT Creation_Date from User where ID = ' + str(id))
         date = cursor.fetchone()
-        # cursor.execute('SELECT website_url  from User where ID = ' + str(id))
-        # websiteurl = cursor.fetchone()
-        # cursor.execute('SELECT profile_image_url  from User where ID = ' + str(id))
-        # profile = cursor.fetchone()
-        # cursor.execute('SELECT About_me  from User where ID = ' + str(id))
-        # about=cursor.fetchone()
         detail=cursor.execute('SELECT * from User where ID = ' + str(id))
         detail=cursor.fetchone()
         date = date[0]

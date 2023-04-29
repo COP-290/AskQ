@@ -56,7 +56,7 @@ export default function Search() {
           <div class="search_title p-1 d-flex justify-content-center">
             <inst5>Search Results for : <inst4>"{location.state.query}"</inst4></inst5>
           </div>
-          {loading ? <center class="py-5"><img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" /></center> :
+          {loading ? <center class="py-5"><img src="https://i.stack.imgur.com/hzk6C.gif" /></center> :
             <>
               <div class="row py-2 d-flex flex-row justify-content-center">
                 {data === 'false' ? "No Results! Please try a longer search query" : "Tags Matched:"}
