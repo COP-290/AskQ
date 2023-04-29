@@ -1,6 +1,6 @@
 import { useEffect,useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MyImage from '/home/baadalvm/repos/Test/frontend/src/assets/askq.jpeg'
+import MyImage from '../../assets/askq.jpeg'
 
 export default function Navbar() {
   const [quer,setQuer] = useState(null);
