@@ -53,7 +53,7 @@ export default function Search() {
     <>
       <body style={{ "font-weight": "600 !important" }}>
         <div class="row">
-          <div class="page_title p-1 d-flex justify-content-center">
+          <div class="p-1 d-flex justify-content-center" style={{"color":"6e6e73 !important","font-size":"xxx-large"}}>
             Search Results for "{location.state.query}"
           </div>
           {loading ? <center class="py-5"><img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" /></center> :
