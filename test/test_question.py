@@ -79,14 +79,16 @@ class TestQuestion(unittest.TestCase):
         x=sort_quesbyTag("Python",1)
         self.assertEqual(a13,x)
     
-    # def test_question_from_list_of_tag(self):
-    #     x=question_from_list_of_tag(["Python","C++"],1)
-    #     self.assertEqual(a14,x)
+    def test_question_from_list_of_tag(self):
+        x=question_from_list_of_tag(["Python","C++"],1)
+        print(x)
+        self.assertEqual(a14,x)
     
-    # def test_question_from_list_of_tag_number(self):
-    #     x=question_from_list_of_tag_number(["Python","C++"])
-    #     self.assertEqual(2,x)
+    def test_question_from_list_of_tag_number(self):
+        x=question_from_list_of_tag_number(["Python","C++"])
+        self.assertEqual(2,x)
     
-    # def test_question_from_list_of_tag_ml(self):
-    #     x=question_from_list_of_tag_ml([("Python",0.3),("C++",0.5)],1)
-    #     self.assertEqual(a16,x)
+    def test_question_from_list_of_tag_ml(self):
+        x=question_from_list_of_tag_ml([("Python",0.3),("C++",0.5)],1)
+        print(x)
+        self.assertEqual(a16,x)
