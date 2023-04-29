@@ -1,8 +1,8 @@
-name: SQL
-run-name: SQL Test
+name: Backend
+run-name: Backend Test
 on: [push]
 jobs:
-  SQL-Test:
+  Backend-Test:
     runs-on: ubuntu-latest
     steps:
 
@@ -45,7 +45,8 @@ jobs:
           mysql -e 'USE askq; insert into User(ID,Display_Name,About_me,Creation_Date,Location,reputation,up_votes,down_votes,website_url) values (63,"Jai","omthig ns o be riten here so write","2004-07-01 15:45:47","India,Hauz jhaus",378,83,8,"www.yahoo.com");' -uroot -proot 
           mysql -e 'USE askq; insert into User(ID,Display_Name,About_me,Creation_Date,Location,reputation,up_votes,down_votes,website_url) values (64,"Zaurez","Soing needs to be wrn thee","2005-08-02 15:43:37","India,Mumbai",3,83,48,"www.ggle.com");' -uroot -proot 
           mysql -e 'USE askq; insert into User(ID,Display_Name,About_me,Creation_Date,Location,reputation,up_votes,down_votes,website_url) values (66,"Satyam","Something needs to be written there","2006-08-01 15:45:37","India",378,893,498,"www.gooogle.com");' -uroot -proot 
-      - name: Clean temp directory
+      
+      - name: Run Unit and Integration Tests
         run: |
           python -m coverage run -m unittest
           python -m coverage report
