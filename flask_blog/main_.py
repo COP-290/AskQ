@@ -28,7 +28,7 @@ app.config['SECRET_KEY'] = 'your secret key'
 
 
 
-# ML API : Returns list of tags and 3 questions according to page
+# ML API : Returns list of tags and 3 questions according to page number
 @app.route('/ml/<int:page>/<string:query>',methods=['GET'])
 def ml(query,page):
     l = api(query)
@@ -267,6 +267,10 @@ def sort_ans_by_time_main(id):
     l,n,ans_list,m=sort_ans_by_time(id,1)
     return dict(enumerate(ans_list[::-1]))
 
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 if __name__=="__main__":
     app.run(host='0.0.0.0',debug=True,port=8080)
