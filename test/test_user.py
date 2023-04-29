@@ -50,4 +50,5 @@ L = ('1/8/2006', (66, 'Satyam', 'Something needs to be written there', datetime.
 class Test_User(unittest.TestCase):
         def test_dis_User(self):
                 x = dis_user(66)
+                print(x)
                 self.assertEqual((L),x)

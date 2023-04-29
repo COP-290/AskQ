@@ -50,10 +50,12 @@ class TestQuestion(unittest.TestCase):
 
     def test_question_page2(self):
         x=question_page2(1,1)
+        print(x)
         self.assertEqual(a5,x)
     
     def test_showQuestion_byscore_help(self):
         x=showQuestion_byscore_help(1)
+        print(x)
         self.assertEqual(a6,x)
 
     def test_sort_que_by_time(self):
