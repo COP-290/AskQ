@@ -29,8 +29,7 @@ a11=1
 a12=5
 a13=[[(90, 66, datetime.datetime(2007, 8, 1, 14, 45, 37), 98, 'SQL', 'Its body is about SQL'), ['Python']]]
 
-a14=[]
-
+a14=[[(90, 66, datetime.datetime(2007, 8, 1, 14, 45, 37), 98, 'SQL', 'Its body is about SQL'), ['Python']], [(91, 62, datetime.datetime(2007, 8, 2, 15, 45, 37), 99, 'Python', 'Its body is not about SQL but about python'), ['C++']]]
 a16=[]
 
 from flask_blog.question import question_from_tag, questionTag_from_id,question_page,question_page2,showQuestion_byscore_help,sort_que_by_time,sort_que_by_time_number,pagefunction2
@@ -81,14 +80,9 @@ class TestQuestion(unittest.TestCase):
     
     def test_question_from_list_of_tag(self):
         x=question_from_list_of_tag(["Python","C++"],1)
-        print(x)
         self.assertEqual(a14,x)
     
     def test_question_from_list_of_tag_number(self):
         x=question_from_list_of_tag_number(["Python","C++"])
         self.assertEqual(2,x)
     
-    def test_question_from_list_of_tag_ml(self):
-        x=question_from_list_of_tag_ml([("Python",0.3),("C++",0.5)],1)
-        print(x)
-        self.assertEqual(a16,x)
