@@ -78,8 +78,8 @@ export default function Navbar() {
                   </li>
                 </ul> 
                 <form onSubmit={onSubmit} class="d-flex mx-2 mb-3">
-                  <input id="quer" class="form-control nav_search_box me-2" type="search" placeholder="Search..." aria-label="Search" onChange={(e) => handleInputChange(e)}></input>
-                  <button class="btn btn-success" >Search</button>
+                  <input id="quer" class="form-control nav_search_box mt-3 me-2" type="search" placeholder="Search..." aria-label="Search" onChange={(e) => handleInputChange(e)}></input>
+                  <button class="btn btn-success mt-3" >Search</button>
                 </form>
                 <div class="col-xl-1 col-lg-1 col-md-12 user_ppp d-flex justify-content-center " >
                   <div class="d-flex justify-content-center" >

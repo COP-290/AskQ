@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Tag1 from './components/tag/tag1';
 import Tag from './components/tag/tag';

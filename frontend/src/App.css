@@ -203,9 +203,6 @@ body,html {
     border-color: #d2d2d7 !important;
     background-color: rgba(255, 255, 255, 0.8) !important;
 }
-.nav_search_box{
-    width:500px;
-}
 .tag_box_tag{
     border: solid 1.5px #ffffff; 
     border-radius: 15px; 
