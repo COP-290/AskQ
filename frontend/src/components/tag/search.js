@@ -63,7 +63,7 @@ export default function Search() {
                 <div class="d-flex flex-row flex-wrap justify-content-center px-2 pt-3" style={{ "row-gap": "15px", "column-gap": "4px" }}>
                   {taglist ? Object.entries(taglist).map(([key, val]) =>
                     <div class="  justify-content-start">
-                      <a class="num_button py-2 my-5 px-3" style={{ "border": "2px solid black !important", "zIndex": "99" }} href={`/tag/${val}`}>
+                      <a class="num_button_search py-2 my-5 px-3" style={{ "border": "2px solid black !important", "zIndex": "99" }} href={`/tag/${val}`}>
                         {val}
                       </a>
                     </div>

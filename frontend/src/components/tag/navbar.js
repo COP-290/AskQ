@@ -65,16 +65,16 @@ export default function Navbar() {
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item d-flex justify-content-center">
-                    <a class="nav-link px-2 mx-1" aria-current="page" href="/about">About</a>
+                    <a class="nav-link px-2 mx-1 d-flex justify-content-center" aria-current="page" href="/about">About</a>
                   </li>
                   <li class="nav-item ms-3 d-flex justify-content-center">
-                    <a class="nav-link px-2 mx-1" href="/tag">Tags</a>
+                    <a class="nav-link px-2 mx-1 d-flex justify-content-center" href="/tag">Tags</a>
                   </li>
                   <li class="nav-item mx-3 d-flex justify-content-center">
-                    <a class="nav-link px-2 mx-1" href="/question">Questions</a>
+                    <a class="nav-link px-2 mx-1 d-flex justify-content-center" href="/question">Questions</a>
                   </li>
                   <li class="nav-item mx-1 d-flex justify-content-center">
-                    <a class="nav-link px-2 mx-1" href="/user">Users</a>
+                    <a class="nav-link px-2 mx-1 d-flex justify-content-center" href="/user">Users</a>
                   </li>
                 </ul> 
                 <form onSubmit={onSubmit} class="d-flex mx-2 mb-3">

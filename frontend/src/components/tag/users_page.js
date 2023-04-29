@@ -25,21 +25,6 @@ export default function User() {
                     Users 
                 </div>
 
-                <div class="d-flex justify-content-center mt-3">
-                    <div class="col-7 px-3 py-2">
-                        <form action="/action_page.php" style={{ "border-radius":"7px"}}>
-                            <input class="form-control" list="tags" name="tag" id="tag" placeholder="Search the filter.."></input>
-                            <datalist id="tags">
-                                <option value="Python"/>
-                                <option value="JavaScript"/>
-                                <option value="MySQL"/>
-                                <option value=""/>
-                                <option value="Safari"/>
-                            </datalist>    
-                        </form>
-                    </div>
-                </div>
-
                 <div class="row user_row d-flex flex row m-3">
                     {data?
                     Object.entries(data).map(([key,value])=>
