@@ -4,7 +4,7 @@ export default function Main() {
       <body class="main_fonts px-5 ">
 
         <div class="d-flex flex-row row man_row d-flex justify-content-center">
-          <div class="d-flex flex-column justify-content-start me-4 col-xl-4 col-lg-4 col-md-10 col-sm-10 col-10 main_row mt-3">
+          <div class="d-flex flex-column justify-content-start me-4 col-xl-4 col-lg-4 col-md-7 col-sm-9 col-12 main_row mt-3">
             <div class="row mx-3 col-12 d-flex justify-content-center">
               <div class="main_lines p-4 ">
                 <inst1><inst>Problem ?</inst> Not able to find the solution ?</inst1>
@@ -56,17 +56,17 @@ export default function Main() {
                       <div class="row py-2 d-flex flex-row ">
                         <div class="d-flex flex-row flex-wrap justify-content-start px-2" style={{ "row-gap": "15px", "column-gap": "4px" }}>
                           <div class="  justify-content-start">
-                            <a class="num_button py-2 my-5 px-3" href={`/tag/${"val"}`} style={{ "zIndex": "99" }}>
+                            <a class="num_button py-2 my-5 px-3" href={`/tag/${"svn"}`} style={{ "zIndex": "99" }}>
                               svn
                             </a>
                           </div>
                           <div class="  justify-content-start">
-                            <a class="num_button py-2 my-5 px-3" href={`/tag/${"val"}`} style={{ "zIndex": "99" }}>
+                            <a class="num_button py-2 my-5 px-3" href={`/tag/${"tortoisesvn"}`} style={{ "zIndex": "99" }}>
                               tortoisesvn
                             </a>
                           </div>
                           <div class="  justify-content-start">
-                            <a class="num_button py-2 my-5 px-3" href={`/tag/${"val"}`} style={{ "zIndex": "99" }}>
+                            <a class="num_button py-2 my-5 px-3" href={`/tag/${"branch"}`} style={{ "zIndex": "99" }}>
                               branch
                             </a>
                           </div>
@@ -99,17 +99,17 @@ export default function Main() {
                       <div class="row py-2 d-flex flex-row ">
                         <div class="d-flex flex-row flex-wrap justify-content-start px-2" style={{ "row-gap": "15px", "column-gap": "4px" }}>
                           <div class="  justify-content-start">
-                            <a class="num_button py-2 my-5 px-3" href={`/tag/${"val"}`} style={{ "zIndex": "99" }}>
+                            <a class="num_button py-2 my-5 px-3" href={`/tag/${"svn"}`} style={{ "zIndex": "99" }}>
                               svn
                             </a>
                           </div>
                           <div class="  justify-content-start">
-                            <a class="num_button py-2 my-5 px-3" href={`/tag/${"val"}`} style={{ "zIndex": "99" }}>
+                            <a class="num_button py-2 my-5 px-3" href={`/tag/${"tortoisesvn"}`} style={{ "zIndex": "99" }}>
                               tortoisesvn
                             </a>
                           </div>
                           <div class="  justify-content-start">
-                            <a class="num_button py-2 my-5 px-3" href={`/tag/${"val"}`} style={{ "zIndex": "99" }}>
+                            <a class="num_button py-2 my-5 px-3" href={`/tag/${"branch"}`} style={{ "zIndex": "99" }}>
                               branch
                             </a>
                           </div>
