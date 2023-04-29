@@ -53,8 +53,8 @@ export default function Search() {
     <>
       <body style={{ "font-weight": "600 !important" }}>
         <div class="row">
-          <div class="search_tilte p-1 d-flex justify-content-center">
-            Search Results for "{location.state.query}"
+          <div class="search_title p-1 d-flex justify-content-center">
+            Search <inst4> Results </inst4> for "{location.state.query}"
           </div>
           {loading ? <center class="py-5"><img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" /></center> :
             <>
