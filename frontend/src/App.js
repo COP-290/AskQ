@@ -1,18 +1,16 @@
 import './App.css';
-import Tag1 from './components/tag1';
+import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Tag from './components/tag';
 import Navbar from './components/navbar';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Par_ques from './components/particular_question';
-import Par_test from './components/particular_test';
 import New_ques from './components/new_question';
-import Test from './components/test';
 import Question from './components/question';
 import Profile from './components/profile';
 import Login from './components/login';
 import Signup from './components/sign_up';
 import About from './components/about';
-import { useEffect, useState } from "react";
 import Fzf from './components/404';
 import Main from './components/main';
 import Search from './components/search';
@@ -34,15 +32,12 @@ function App() {
   return (
     <>
       <Router>
-        <Routes>
-          <Route path="/tag1" element={<><Navbar/><Tag1/></>} />        
+        <Routes>     
           <Route path="/" element={<><Navbar/><Main/></>} />
           <Route path="/about" element={<><Navbar/><About/></>} />        
           <Route path="/tag" element={<><Navbar/><Tag/></>} />        
-          <Route path="/tag/:id" element={<><Navbar/><Question/> </>} />        
-          <Route path="/test" element={<><Navbar/><Test/></>} />        
-          <Route path="/particular_question" element={<><Navbar/><Par_ques/></>} />        
-          <Route path="/particular_test" element={<><Navbar/><Par_test/></>} />        
+          <Route path="/tag/:id" element={<><Navbar/><Question/> </>} />               
+          <Route path="/particular_question" element={<><Navbar/><Par_ques/></>} />               
           <Route path="/new_question" element={<><Navbar/><New_ques/></>} />        
           <Route path="/question/:id" element={<><Navbar/><Par_ques/></>} />        
           <Route path="/question" element={<><Navbar/><Question/></>} />        
