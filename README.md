@@ -10,7 +10,8 @@
 - APIs for Particular Question in `particular_question.py`
 
 ## Frontend: Inside folder `frontend`
-Created using ReactJS and Bootstrap
+Created using ReactJS and Bootstrap.
+
 Components inside `frontend/src/components`
 - Home page in `main.js`
 - Navbar in `navbar.js`
