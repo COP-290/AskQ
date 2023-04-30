@@ -1,4 +1,4 @@
-# AskQ: A forum to **ask** **q**uestions and get answers
+# AskQ: A forum to ask questions and get answers
 
 ## Backend: Inside folder `flask_blog`
 
@@ -10,6 +10,7 @@
 - APIs for Particular Question in `particular_question.py`
 
 ## Frontend: Inside folder `frontend`
+Created using ReactJS and Bootstrap
 Components inside `frontend/src/components`
 - Home page in `main.js`
 - Navbar in `navbar.js`
