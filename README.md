@@ -1,4 +1,4 @@
-# ASKQ: A forum to **ask** **q**uestions and get answers
+# AskQ: A forum to **ask** **q**uestions and get answers
 
 ## Backend: Inside folder `flask_blog`
 
@@ -9,10 +9,10 @@
 - APIs for Users in `user.py`
 - APIs for Particular Question in `particular_question.py`
 
-# Frontend: Inside folder `frontend`
+## Frontend: Inside folder `frontend`
 Components inside `frontend/src/components`
 
-# Unit and Integration Tests: Inside folder `test`
+## Unit and Integration Tests: Inside folder `test`
 1. Frontend Integration test in `.github/workflows/frontend.yaml`
 2. Python Unit and Integration Tests:
-    - Tests related to `x` in `test_x.py` where x in {`user`,`tag`,`question`,`particular_question`}
+    - Tests related to `X` in `test_X.py` where `X` in {`user`,`tag`,`question`,`particular_question`}
