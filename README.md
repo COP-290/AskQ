@@ -1,5 +1,5 @@
 # AskQ: A forum to ask questions and get answers
-Also deployed on [Firebase](https://kaipoche.web.app/) + [Railway](https://askq.up.railway.app/)
+Also deployed on [Firebase](https://kaipoche.web.app/) + [Vercel](https://askq-backend.vercel.app/)
 ## Backend: Inside folder `flask_blog`
 
 - Redirects from `main_.py`
